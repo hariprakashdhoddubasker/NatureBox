@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ShowAllFiles>false</ShowAllFiles>
+    <_LastSelectedProfileId>F:\GitHub\NatureBox\NutritionCenter\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Customers\CustomerRegistrationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Customers\HealthRecordView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Customers\CustomerInvoiceReportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Customers\CustomerPaymentReportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Partners\PartnerInvoiceReportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Reports\BackUpRestoreView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Partners\PartnerSettlementReportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DialogWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Partners\PartnerRegistrationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\HeaderView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Transactions\InvoiceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NavigationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Customers\CustomerPaymentView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Products\ProductRegistrationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Customers\HealthRecordView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Customers\CustomerInvoiceReportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Customers\CustomerPaymentReportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Partners\PartnerInvoiceReportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Partners\PartnerSettlementReportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Partners\PartnerSettlementView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\AutoCompleteTextBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Customers\CustomerRegistrationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Partners\PartnerRegistrationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Reports\BackUpRestoreView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HeaderView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Transactions\InvoiceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NavigationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Customers\CustomerPaymentView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Products\ProductRegistrationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

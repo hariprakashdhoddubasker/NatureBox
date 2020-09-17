@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="NatureBox.Transactions.InvoiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:controls="clr-namespace:NatureBox.Service" 
+             xmlns:converter="clr-namespace:NatureBox.Converter"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="Load"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <UserControl.Resources>
+        <converter:NumberIncrementConverter x:Key="NumberIncrementConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
+            <Grid  Margin="15,0,15,0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="INVOICE" HorizontalAlignment="left" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="Gray" FontSize="18" Grid.Row="0"/>
+
+                <Grid VerticalAlignment="Center" Grid.Row="1"  Margin="15,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <controls:AutoCompleteTextBox x:Name="txt" Margin="0,10" AutoCompleteWidth="{Binding ElementName=txt, Path=ActualWidth}" AutoCompleteHeight="150" AutoCompletePlacementTarget="{Binding ElementName=txt}" AutoCompletePlacement="Bottom" AutoCompleteItemSource ="{Binding GridCustomers}" Grid.Row="0" Grid.Column="0" SelectedItem="{Binding Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SearchText="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <controls:AutoCompleteTextBox.AutoCompleteColumns>
+                            <DataGridTextColumn Header="Id" MinWidth="60" Width="Auto" Binding="{Binding CustomerId}"/>
+                            <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Mobile Number" Width="150" Binding="{Binding MobileNumber}"/>
+                            <DataGridTextColumn Header="Date Of Birth" Width="150" Binding="{Binding DOB, StringFormat=\{0:dd MMM yyyy\}}"/>
+                        </controls:AutoCompleteTextBox.AutoCompleteColumns>
+                    </controls:AutoCompleteTextBox>
+
+                    <TextBox Margin="0,10" materialDesign:HintAssist.Hint="Mobile Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.MobileNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" IsReadOnly="True"/>
+
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="REFERRED BY" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.Employee.UserName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0" IsReadOnly="True"/>
+
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="BALANCE AMOUNT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.BalanceAmount, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="0" IsReadOnly="True"/>
+
+                    <ComboBox  Margin="5,10" Height="45" VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="PRODUCT NAME" ItemsSource="{Binding Products}"  SelectedValue="{Binding SelectedProduct,Mode=TwoWay}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="0" Grid.Column="1"  >
+                        <ComboBox.SelectedItem>
+                            <Binding Path="SelectedProduct" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="MRP" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding SelectedProduct.MRP, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="QUANTITY" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Invoice.Quantity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="2">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding Path=BtnSendSMSCommand}" Key="Enter" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="TOTAL AMOUNT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Invoice.Amount, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="2" IsReadOnly="True"/>
+                </Grid>
+
+                <Button Width="150"  Grid.Row="2"  HorizontalAlignment="Center"  Content="SEND SMS" Background="#FF78BE1F" Command="{Binding BtnSendSMSCommand}" />
+
+                <DataGrid Grid.Row="3" Grid.ColumnSpan="2" Height="auto"  Width="auto" RowBackground="#e4ffcf" AlternatingRowBackground="White" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  ItemsSource="{Binding GridInvoices}" IsSynchronizedWithCurrentItem="True" Margin="0,15" AlternationCount="{Binding GridInvoices.Count}">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#78BE1F" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Delete">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Height="25" Width="60" FontSize="10" Background="#FF78BE1F"  Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.GridRowDeleteCommand}" CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="C.No" Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource NumberIncrementConverter}}" Width="*"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Customer.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Mobile No" Binding="{Binding Customer.MobileNumber}" Width="*"/>
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding Product.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                        <DataGridTextColumn Header="Invoice Amount" Binding="{Binding Amount}" Width="*"/>
+                        <DataGridTextColumn Header="Refered By" Binding="{Binding Customer.Employee.UserName}"  Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+
+</UserControl>
