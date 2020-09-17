@@ -136,8 +136,8 @@
 
                  if (savedInvoice != null)
                  {
-                     string smsStatus = string.Empty;
-                     //smsStatus = new SmsService(Customer, Invoice).Send();
+                     //string smsStatus = string.Empty;
+                     smsStatus = new SmsService(Customer, Invoice).Send();
 
                      if (!string.IsNullOrEmpty(smsStatus))
                      {
@@ -218,10 +218,10 @@
         private async void OnGridRowDeleteClick(object obj)
         {
             var currentGridRowInvoice = (Invoice)obj;
-            Customer.BalanceAmount += currentGridRowInvoice.Amount;
+            currentGridRowInvoice.Customer.BalanceAmount += currentGridRowInvoice.Amount;
             var isInvoiceDeleted = false;
 
-            await myCustomerRepo.UpdateAsync(Customer).ContinueWith((result) =>
+            await myCustomerRepo.UpdateAsync(currentGridRowInvoice.Customer).ContinueWith((result) =>
             {
                 var isInvoiceDeleted = myInvoiceRepo.DeleteAsync(((Invoice)obj).InvoiceId).Result;
             });

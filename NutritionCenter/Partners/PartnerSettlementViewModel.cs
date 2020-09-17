@@ -109,7 +109,7 @@ namespace NatureBox.Partners
         public DateTime ToDate
         {
             get => this.myToDate;
-            set => SetProperty(ref myToDate, value + new TimeSpan(23, 59, 0));
+            set => SetProperty(ref myToDate, value);
         }
 
         public double TotalCost

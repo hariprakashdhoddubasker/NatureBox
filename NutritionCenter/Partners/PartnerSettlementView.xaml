@@ -61,8 +61,8 @@
                     <DataGridTextColumn Header="Invoice Date" Binding="{Binding DateOfPurchase, StringFormat=\{0:ddMMMyyyy\}}" Width="*"/>
                     <DataGridTextColumn Header="Customer Name" Binding="{Binding Customer}" Width="*"/>
                     <DataGridTextColumn Header="Product Name" Binding="{Binding Product}"  Width="*"/>
-                    <DataGridTextColumn Header="Product Cost" Binding="{Binding Product.Cost}"  Width="*"/>
                     <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"  Width="*"/>
+                    <DataGridTextColumn Header="Product Cost" Binding="{Binding Product.Cost}"  Width="*"/>  
                     <DataGridTextColumn Header="Total Cost" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=Cost, StringFormat=N2}"  Width="*"/>
                     <DataGridTextColumn Header="Volume Point" Binding="{Binding Product.VolumePoint}"  Width="*"/>
                     <DataGridTextColumn Header="Total Volume Point" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=VolumePoint, StringFormat=N2}"  Width="*"/>

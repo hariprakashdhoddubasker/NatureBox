@@ -92,10 +92,10 @@ namespace NatureBox.Customers.Service
             stringBuilder.Append(Constants.HtmlEndTag);
 
             string drivePath = Helper.GetAvailableDrivePath();
-            var folderPath = drivePath + "\\NatureBox\\Reports";
+            var folderPath = drivePath + "Reports";
             Directory.CreateDirectory(folderPath);
 
-            var fileSavePath = $"{ folderPath }{customer.Name}_{customer.CustomerId}_{DateTime.Now:ddMMMyyyy}.html";
+            var fileSavePath = $"{ folderPath }\\{customer.Name}_{customer.CustomerId}_{DateTime.Now:ddMMMyyyy}.html";
 
             using (FileStream fs = new FileStream(fileSavePath, FileMode.Create))
             {

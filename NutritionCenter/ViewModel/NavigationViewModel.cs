@@ -47,6 +47,12 @@
                 new SubItem(NatureBoxForms.CustomerPaymentReport.GetDescription())
             };
 
+            var financialSubItems = new List<SubItem>
+            {
+                new SubItem(NatureBoxForms.CustomerPayment.GetDescription()),
+                new SubItem(NatureBoxForms.Invoice.GetDescription())
+            };
+
             if (UIService.CurrentUser.Role == NatureBoxRoles.Admin.ToString())
             {
                 registorSubItems.Add(new SubItem(NatureBoxForms.Partner.GetDescription()));
@@ -54,14 +60,9 @@
 
                 reportSubItems.Add(new SubItem(NatureBoxForms.ParnterSettlementReport.GetDescription()));
                 reportSubItems.Add(new SubItem(NatureBoxForms.BackUp.GetDescription()));
-            }
 
-            var financialSubItems = new List<SubItem>
-            {
-                new SubItem(NatureBoxForms.CustomerPayment.GetDescription()),
-                new SubItem(NatureBoxForms.ParterSettlement.GetDescription()),
-                new SubItem(NatureBoxForms.Invoice.GetDescription())
-            };
+                financialSubItems.Add(new SubItem(NatureBoxForms.ParterSettlement.GetDescription()));
+            }
 
             var financialItemMenu = new ItemMenuViewModel("FINANCIAL", financialSubItems, PackIconKind.ScaleBalance, myEventAggregator);
             var registorItemMenu = new ItemMenuViewModel("REGISTER", registorSubItems, PackIconKind.Register, myEventAggregator);

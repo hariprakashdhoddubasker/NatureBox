@@ -30,8 +30,8 @@ namespace NatureBox.Service
                     break;
                 }
             }
-            var natureBoxPath = drivePath + "\\NatureBox\\";
-            Directory.CreateDirectory(drivePath + "\\NatureBox\\");
+            var natureBoxPath = drivePath + "NatureBox\\";
+            Directory.CreateDirectory(natureBoxPath);
             return natureBoxPath;
         }
     }

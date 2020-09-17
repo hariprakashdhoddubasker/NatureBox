@@ -164,7 +164,7 @@ namespace NatureBox.Customers
             Mouse.OverrideCursor = Cursors.Wait;
            var fileSavePath = HtmlReport.Generate(GridHealthRecords.ToList(), Customer);
             Mouse.OverrideCursor = null;
-            UIService.ShowMessage($"Report downloaded {Environment.NewLine} {fileSavePath}");
+            UIService.ShowMessage($"Report downloaded {Environment.NewLine}{fileSavePath}");
         }
 
 
