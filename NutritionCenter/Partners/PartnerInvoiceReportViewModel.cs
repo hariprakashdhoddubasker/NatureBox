@@ -177,9 +177,9 @@ namespace NatureBox.Partners
 
             GridInvoices = new ObservableCollection<Invoice>(filteredInvoice);
             TotalMRP = filteredInvoice.Sum(invoice => invoice.Product.MRP * invoice.Quantity);
-            TotalVolumnPoint = filteredInvoice.Sum(invoice => invoice.Product.MRP * invoice.Product.VolumePoint);
-            TotalExpense = filteredInvoice.Sum(invoice => invoice.Product.MRP * invoice.Product.Expense);
-            TotalCost = filteredInvoice.Sum(invoice => invoice.Product.MRP * invoice.Product.Cost);
+            TotalVolumnPoint = filteredInvoice.Sum(invoice => invoice.Product.VolumePoint * invoice.Quantity);
+            TotalExpense = filteredInvoice.Sum(invoice =>invoice.Product.Expense * invoice.Quantity);
+            TotalCost = filteredInvoice.Sum(invoice => invoice.Product.Cost * invoice.Quantity);
         }
 
         private void Clear()

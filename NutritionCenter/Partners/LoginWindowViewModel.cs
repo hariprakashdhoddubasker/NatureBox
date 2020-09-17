@@ -34,7 +34,7 @@
         }
 
         private void BtnLoginClick(object obj)
-        {          
+        {
             var currentUser = allEmployees.ToList().Where(c => string.Equals(c.UserName, Employee.UserName, StringComparison.OrdinalIgnoreCase) && string.Equals(c.Password, Employee.Password));
 
             if (currentUser.FirstOrDefault() == null)
@@ -48,15 +48,16 @@
             }
         }
 
-        public void Load()
+        public async void Load()
         {
-            Task.Run(() =>
-            {
-                _repo.GetAllAsync().ContinueWith((result) =>
-                {
-                    allEmployees = result.Result.ToList();
-                });
-            });            
+            //Task.Run(() =>
+            //{
+            allEmployees = new List<Partner>(await _repo.GetAllAsync());
+            //.ContinueWith((result) =>
+             //{
+             //    allEmployees = result.Result.ToList();
+             //});
+            //});            
         }
 
         private void Employee_PropertyChanged(object sender, PropertyChangedEventArgs e)

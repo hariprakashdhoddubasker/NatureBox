@@ -3,7 +3,6 @@
     using NatureBox.Dialog;
     using NatureBox.Partners;
     using NatureBox.Service;
-    using NatureBox.Service;
     using NatureBox.ViewModel;
     using NatureBox.Views;
     using System;
