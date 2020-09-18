@@ -14,6 +14,26 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Label Content="Nature Box" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Berlin Sans FB Demi" Foreground="White" FontSize="35" Grid.ColumnSpan="3" FontWeight="DemiBold" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <!--<TextBlock Margin="10,10,10,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Grid.Row="1" Foreground="White" FontWeight="DemiBold" Text="Contact">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding BtnContactCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+            </TextBlock>-->
+            <Label Content="Nature Box" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Berlin Sans FB Demi" Foreground="White" FontSize="35" Grid.Row="0" Grid.ColumnSpan="3" FontWeight="DemiBold"/>
+            <TextBlock Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Grid.Row="1" Foreground="White" FontWeight="DemiBold" Text="{Binding CurrentUserName}"/>
+        </Grid>
     </Grid>
 </UserControl>

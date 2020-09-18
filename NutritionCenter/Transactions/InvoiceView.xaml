@@ -96,7 +96,8 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="C.No" Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource NumberIncrementConverter}}" Width="*"/>
+                        <!--<DataGridTextColumn Header="C.No" Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource NumberIncrementConverter}}" Width="*"/>-->
+                        <DataGridTextColumn Header="C.No" Binding="{Binding SerialNumber}" Width="*"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Customer.Name}" Width="*"/>
                         <DataGridTextColumn Header="Mobile No" Binding="{Binding Customer.MobileNumber}" Width="*"/>
                         <DataGridTextColumn Header="Product Name" Binding="{Binding Product.Name}" Width="*"/>

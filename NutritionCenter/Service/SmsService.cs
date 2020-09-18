@@ -1,5 +1,6 @@
 ﻿using NatureBox.Model;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -8,18 +9,68 @@ namespace NatureBox.Service
 {
     public class SmsService
     {
-        private readonly Customer myCustomer;
-        private readonly Invoice myInvoice;
         private readonly SMSData mySMS;
 
-        public SmsService(Customer customer, Invoice invoice)
+        public SmsService()
         {
-            myCustomer = customer;
-            myInvoice = invoice;
             mySMS = new SMSData();
-            GenerateInvoiceMessage();
         }
-        public string Send()
+
+        public string SendInvoiceMessage(Customer customer, Invoice invoice)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"Dear {customer.Name},");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append($"Nature Box debited for INR {invoice.Amount}/- Bal INR {customer.BalanceAmount}/-as of {invoice.DateOfPurchase:ddMMMyy hh:mmtt}.");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Thank You,");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Nature Box Nutrition Club");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Eat good Feel good");
+
+            mySMS.Message = stringBuilder.ToString();
+            mySMS.MobileNumber = customer.MobileNumber;
+
+            return Send();
+        }
+
+        public string SendCustomerPaymentMessage(CustomerPayment customerPayment, List<Partner> admins, string partnerName, string customerName)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"Dear |Admin|,");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append($"{partnerName} has deposited Rs.{customerPayment.AmountPaid} to {customerName}'s Nature Box account on {customerPayment.DateOfPayment:ddMMMyy hh:mmtt}.");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Thank You,");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Nature Box Nutrition Club");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Eat good Feel good");
+
+            mySMS.Message = stringBuilder.ToString();           
+
+            var results = string.Empty;
+
+            foreach (var partner in admins)
+            {
+                mySMS.Message = mySMS.Message.Replace("|Admin|", partner.UserName);
+                mySMS.MobileNumber = partner.MobileNumber;
+
+                if (mySMS.MobileNumber.ToString().Length == 10)
+                {
+                    results += Send();
+                }
+            }
+
+            return results;
+        }
+
+        private string Send()
         {
             string result;
 
@@ -52,30 +103,6 @@ namespace NatureBox.Service
                 sr.Close();
             }
             return result;
-        }
-
-        internal void GenerateInvoiceMessage()
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append($"Dear {myCustomer.Name},");
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append($"Nature Box debited for INR {myInvoice.Amount}/- Bal INR {myCustomer.BalanceAmount}/-as of {myInvoice.DateOfPurchase:ddMMMyy hh:mmtt}.");
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append("Thank You,");
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append("Nature Box Nutrition Club");
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append("Eat good Feel good");
-
-            //if (stringBuilder.ToString().Length > 160)
-            //{
-            //   int nameLimit = 160 - stringBuilder.ToString().Length;
-            //    customer.Name.Substring(0, nameLimit);
-            //}
-            mySMS.Message = stringBuilder.ToString();
-            mySMS.MobileNumber = myCustomer.MobileNumber;
         }
     }
 }

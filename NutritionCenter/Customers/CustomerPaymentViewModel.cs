@@ -17,6 +17,7 @@
     public class CustomerPaymentViewModel : BaseViewModel
     {
         private List<Customer> myAllCustomers;
+        private List<Partner> myAllEmployees;
         private ObservableCollection<Customer> myGridCustomers;
         private Customer myCustomer;
         private CustomerPayment myPayment;
@@ -106,11 +107,17 @@
                 }).ContinueWith((result) =>
                 {
                     myCustomerPaymentRepo.AddAsync(CustomerPayment);
-                });
+                    var amountPaid = CustomerPayment.AmountPaid;
+                    var customerName = Customer.Name;                  
 
-                UIService.ShowMessage($"Payment of Rs.{CustomerPayment.AmountPaid} is added to {Customer.Name}'s account");
+                    var admins = myAllEmployees.Where(employee => employee.Role == NatureBoxRoles.Admin.ToString()).ToList();
+
+                    var smsStatus = new SmsService().SendCustomerPaymentMessage(CustomerPayment, admins, UIService.CurrentUser.UserName, customerName);
+                    Load();
+
+                    UIService.ShowMessage($"Payment of Rs.{amountPaid} is added to {customerName}'s account");
+                });
             }
-            Load();
         }
 
         private void Clear()
@@ -125,9 +132,11 @@
             Clear();
 
             myAllCustomers = new List<Customer>(await myCustomerRepo.GetAllAsync());
+            myAllEmployees = new List<Partner>(await myEmployeeRepo.GetAllAsync());
+
             foreach (var customer in myAllCustomers)
             {
-                customer.Employee = await myEmployeeRepo.GetEntityByIdAsync(customer.EmployeeId);
+                customer.Employee = myAllEmployees.FirstOrDefault(employee => employee.EmployeeId == customer.EmployeeId);
             }
         }
     }

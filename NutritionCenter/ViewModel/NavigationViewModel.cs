@@ -4,7 +4,6 @@
     using NatureBox.Service;
     using NatureBox.Views;
     using Prism.Events;
-    using System;
     using System.Collections.Generic;
     using System.Windows.Controls;
 

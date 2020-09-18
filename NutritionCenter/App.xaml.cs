@@ -19,7 +19,7 @@
     /// </summary
     public partial class App : Application
     {
-        private readonly List<string> macIdList = new List<string>() { "C8D9D2EE9E6E","A85E45306811" };
+        private readonly List<string> macIdList = new List<string>() { "C8D9D2EE9E6E", "A85E45306811" };
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -46,20 +46,20 @@
             var mainWindowViewModel = ContainerHelper.Container.Resolve<MainViewModel>();
             var loginViewModel = ContainerHelper.Container.Resolve<LoginWindowViewModel>();
             var login = new LoginWindow { DataContext = loginViewModel };
-            LogService.LogMessage("Testing");
-            loginViewModel.LoginCompleted += (sender, args) =>
-            {
-                mainWindowViewModel.RegisterNavigationViewModel();
-                MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
-                mainWindow.Show();
-                login.Close();
-            };
-            login.ShowDialog();
 
-            //UIService.CurrentUser = new Model.Partner { Role = NatureBoxRoles.Admin.ToString() };
-            //mainWindowViewModel.RegisterNavigationViewModel();
-            //MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
-            //mainWindow.Show();
+            //loginViewModel.LoginCompleted += (sender, args) =>
+            //{
+            //    mainWindowViewModel.RegisterNavigationViewModel();
+            //    MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
+            //    mainWindow.Show();
+            //    login.Close();
+            //};
+            //login.ShowDialog();
+
+            UIService.CurrentUser = new Model.Partner { UserName = "DemoUser", Role = NatureBoxRoles.Admin.ToString() };
+            mainWindowViewModel.RegisterNavigationViewModel();
+            MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
+            mainWindow.Show();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

@@ -8,12 +8,16 @@ using NatureBox.Transactions;
 using Prism.Events;
 using System.Threading.Tasks;
 using Unity;
+using System.Windows.Input;
+using NatureBox.Commands;
+using System;
 
 namespace NatureBox.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
         private BaseViewModel mySelectedViewModel;
+        private ContactViewModel myContactViewModel;
         private PartnerRegistrationViewModel myEmployeeRegistrationViewModel;
         private CustomerRegistrationViewModel myCustomerRegistrationViewModel;
         private ProductRegistrationViewModel myProductRegistrationViewModel;
@@ -27,6 +31,7 @@ namespace NatureBox.ViewModel
         private PartnerSettlementReportViewModel myPartnerPaymentReportViewModel;
         private CustomerPaymentReportViewModel myCustomerPaymentReportViewModel;
         private IEventAggregator myEventAggregator;
+        private string myCurrentUserName;
 
         public MainViewModel(IEventAggregator eventAggregator)
         {
@@ -34,7 +39,7 @@ namespace NatureBox.ViewModel
             {
                 myEventAggregator = eventAggregator;
                 myEventAggregator.GetEvent<NavigateViewsEvent>().Subscribe(UpdateViewModel);
-
+                myContactViewModel = ContainerHelper.Container.Resolve<ContactViewModel>();
                 myEmployeeRegistrationViewModel = ContainerHelper.Container.Resolve<PartnerRegistrationViewModel>();
                 myCustomerRegistrationViewModel = ContainerHelper.Container.Resolve<CustomerRegistrationViewModel>();
                 myProductRegistrationViewModel = ContainerHelper.Container.Resolve<ProductRegistrationViewModel>();
@@ -49,8 +54,11 @@ namespace NatureBox.ViewModel
                 myBackUpRestoreViewModel = ContainerHelper.Container.Resolve<BackUpRestoreViewModel>();
 
                 this.SelectedViewModel = myInvoiceViewModel;
+                this.BtnContactCommand = new Command(this.OnContactClick, o => true);
             });
         }
+
+        public ICommand BtnContactCommand { get; private set; }
 
         public NavigationViewModel NavigationViewModel { get; set; }
 
@@ -58,6 +66,12 @@ namespace NatureBox.ViewModel
         {
             get { return mySelectedViewModel; }
             set => SetProperty(ref mySelectedViewModel, value);
+        }
+
+        public string CurrentUserName
+        {
+            get { return myCurrentUserName; }
+            set => SetProperty(ref myCurrentUserName, value);
         }
 
         private void UpdateViewModel(NatureBoxForms natureBoxForms)
@@ -74,7 +88,7 @@ namespace NatureBox.ViewModel
                     SelectedViewModel = myProductRegistrationViewModel;
                     break;
                 case NatureBoxForms.HealthRecord:
-                    SelectedViewModel = myHealthRecordViewModel;              
+                    SelectedViewModel = myHealthRecordViewModel;
                     break;
                 case NatureBoxForms.CustomerPayment:
                     SelectedViewModel = myCustomerPaymentViewModel;
@@ -105,9 +119,19 @@ namespace NatureBox.ViewModel
             }
         }
 
+        private void OnContactClick(object obj)
+        {
+            SelectedViewModel = myContactViewModel;
+        }
+
         public void RegisterNavigationViewModel()
         {
             NavigationViewModel = ContainerHelper.Container.Resolve<NavigationViewModel>();
+        }
+
+        public void Load()
+        {
+            this.CurrentUserName = "Hi, " + UIService.CurrentUser.UserName;
         }
     }
 }

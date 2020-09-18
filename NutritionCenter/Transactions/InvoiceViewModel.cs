@@ -128,28 +128,21 @@
         private async void OnSendSMSClick(object obj)
         {
             Customer.BalanceAmount -= Invoice.Amount;
-            var isInvoiceAdded = false;
             string smsStatus = string.Empty;
+
             await myCustomerRepo.UpdateAsync(Customer).ContinueWith((result) =>
              {
                  var savedInvoice = myInvoiceRepo.AddAsync(Invoice);
 
                  if (savedInvoice != null)
                  {
-                     //string smsStatus = string.Empty;
-                     smsStatus = new SmsService(Customer, Invoice).Send();
+                     string smsStatus = string.Empty;
+                     //smsStatus = new SmsService().SendInvoiceMessage(Customer, Invoice);
 
-                     if (!string.IsNullOrEmpty(smsStatus))
-                     {
-                         isInvoiceAdded = true;
-                     }
+                     UIService.ShowMessage(smsStatus);
                  }
              });
 
-            if (isInvoiceAdded)
-            {
-                UIService.ShowMessage(smsStatus);
-            }
             Load();
         }
 
@@ -205,11 +198,12 @@
             DateTime fromDate = DateTime.Now.Date + new TimeSpan(00, 01, 0);
             DateTime toDate = DateTime.Now.Date + new TimeSpan(23, 59, 0);
             tempInvoices = tempInvoices.Where(invoice => invoice.DateOfPurchase > fromDate && invoice.DateOfPurchase < toDate).ToList();
-
+            var index = 1;
             foreach (var invoice in tempInvoices)
             {
                 invoice.Customer = myAllCustomers.FirstOrDefault(customer => customer.CustomerId == invoice.CustomerId);
                 invoice.Product = allProducts.FirstOrDefault(product => product.ProductId == invoice.ProductId);
+                invoice.SerialNumber = index++;
             }
 
             GridInvoices = new ObservableCollection<Invoice>(tempInvoices);
