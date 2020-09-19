@@ -108,11 +108,15 @@
                 {
                     myCustomerPaymentRepo.AddAsync(CustomerPayment);
                     var amountPaid = CustomerPayment.AmountPaid;
-                    var customerName = Customer.Name;                  
+                    var customerName = Customer.Name;
 
                     var admins = myAllEmployees.Where(employee => employee.Role == NatureBoxRoles.Admin.ToString()).ToList();
 
-                    var smsStatus = new SmsService().SendCustomerPaymentMessage(CustomerPayment, admins, UIService.CurrentUser.UserName, customerName);
+                    if (UIService.CurrentUser.Role != NatureBoxRoles.Admin.ToString())
+                    {
+                        new SmsService().SendCustomerPaymentMessage(CustomerPayment, admins, UIService.CurrentUser.UserName, customerName);
+                    }
+
                     Load();
 
                     UIService.ShowMessage($"Payment of Rs.{amountPaid} is added to {customerName}'s account");

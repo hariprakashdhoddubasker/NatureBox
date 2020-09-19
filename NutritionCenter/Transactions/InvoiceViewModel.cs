@@ -136,8 +136,8 @@
 
                  if (savedInvoice != null)
                  {
-                     string smsStatus = string.Empty;
-                     //smsStatus = new SmsService().SendInvoiceMessage(Customer, Invoice);
+                     //string smsStatus = string.Empty;
+                     smsStatus = new SmsService().SendInvoiceMessage(Customer, Invoice);
 
                      UIService.ShowMessage(smsStatus);
                  }

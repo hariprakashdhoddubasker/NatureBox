@@ -39,6 +39,8 @@
             set => SetProperty(ref myIsSettled, value);
         }
 
+        [NotMapped]
+        public int SerialNumber { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
     }

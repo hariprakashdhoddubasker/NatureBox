@@ -141,6 +141,11 @@ namespace NatureBox.Customers
             {
                 filteredCustomerPayment = myAllCustomerPayments.Where(CustomerPayment => CustomerPayment.DateOfPayment > this.FromDate && CustomerPayment.DateOfPayment < this.ToDate && CustomerPayment.CustomerId == Customer.CustomerId).ToList();
             }
+            var index = 1;
+            foreach (var customerPayment in filteredCustomerPayment)
+            {
+                customerPayment.SerialNumber = index++;
+            }
 
             GridCustomerPayments = new ObservableCollection<CustomerPayment>(filteredCustomerPayment);
         }

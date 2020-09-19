@@ -50,15 +50,13 @@ namespace NatureBox.Service
             stringBuilder.Append(Environment.NewLine);
             stringBuilder.Append("Nature Box Nutrition Club");
             stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append("Eat good Feel good");
-
-            mySMS.Message = stringBuilder.ToString();           
+            stringBuilder.Append("Eat good Feel good");                     
 
             var results = string.Empty;
 
             foreach (var partner in admins)
             {
-                mySMS.Message = mySMS.Message.Replace("|Admin|", partner.UserName);
+                mySMS.Message = stringBuilder.ToString().Replace("|Admin|", partner.UserName);
                 mySMS.MobileNumber = partner.MobileNumber;
 
                 if (mySMS.MobileNumber.ToString().Length == 10)

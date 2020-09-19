@@ -43,6 +43,8 @@
             set => SetProperty(ref myAmountPaid, value);
         }
 
+        [NotMapped]
+        public int SerialNumber { get; set; }
         public virtual Customer Customer { get; set; }
     }
 }

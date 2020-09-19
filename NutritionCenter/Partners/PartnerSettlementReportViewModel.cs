@@ -130,6 +130,11 @@ namespace NatureBox.Partners
             {
                 filteredPartnerPayment = myAllPartnerPayments.Where(partnerPayment => partnerPayment.DateOfPayment > this.FromDate && partnerPayment.DateOfPayment < this.ToDate && partnerPayment.EmployeeId == Partner.EmployeeId).ToList();
             }
+            var index = 1;
+            foreach (var partnerPayment in filteredPartnerPayment)
+            {
+                partnerPayment.SerialNumber = index++;
+            }
 
             GridPartnerPayments = new ObservableCollection<PartnerPayment>(filteredPartnerPayment);
         }

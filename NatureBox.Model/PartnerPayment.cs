@@ -77,7 +77,8 @@ namespace NatureBox.Model
             get => this.myTotalNoOfProducts;
             set => SetProperty(ref myTotalNoOfProducts, value);
         }
-
+        [NotMapped]
+        public int SerialNumber { get; set; }
         public virtual Partner Employee { get; set; }
     }
 }

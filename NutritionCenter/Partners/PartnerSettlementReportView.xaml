@@ -77,7 +77,7 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="S.No" Binding="{Binding AlternationIndex, RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource NumberIncrementConverter}}" Width="*"/>
+                        <DataGridTextColumn Header="S.No" Binding="{Binding SerialNumber}" Width="*"/>
                         <DataGridTextColumn Header="Partner Name" Binding="{Binding Employee.UserName}" Width="*"/>
                         <DataGridTextColumn Header="From Date" Binding="{Binding BillingCycleFromDate, StringFormat=\{0:ddMMMyyyy\}}" Width="*"/>
                         <DataGridTextColumn Header="To Date" Binding="{Binding BillingCycleToDate, StringFormat=\{0:ddMMMyyyy\}}" Width="*"/>

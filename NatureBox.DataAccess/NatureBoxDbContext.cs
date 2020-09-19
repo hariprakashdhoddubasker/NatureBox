@@ -45,7 +45,8 @@
             Employees.Add(new Partner
             {
                 UserName = "Admin",
-                Password = "admin@naturebox",
+                Password = "84265",
+                MobileNumber = 9965123345,
                 Role = "Admin"
             });
 
