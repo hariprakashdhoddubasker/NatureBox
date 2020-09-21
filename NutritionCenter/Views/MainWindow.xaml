@@ -25,7 +25,21 @@
         </Grid.ColumnDefinitions>
         <local:HeaderView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
         <local:NavigationView  Grid.Row="1" DataContext="{Binding NavigationViewModel}" Grid.RowSpan="2" />
-        <Grid  Margin="0 50 0 0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" > 
+        <TextBlock Margin="0,5,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Grid.Row="1" Grid.Column="1" Foreground="Gray" Text="SUPPORT">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+            <TextBlock.InputBindings>
+                <MouseBinding Command="{Binding BtnContactCommand}" MouseAction="LeftClick" />
+            </TextBlock.InputBindings>
+        </TextBlock>
+        <Grid  Margin="0 40 0 0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" > 
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/NatureBox_Logo.png" Stretch="UniformToFill" Opacity="0.2"/>
             </Grid.Background>

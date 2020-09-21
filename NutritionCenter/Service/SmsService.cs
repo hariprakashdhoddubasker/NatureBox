@@ -68,6 +68,29 @@ namespace NatureBox.Service
             return results;
         }
 
+        public string SendReferralMessage(string Name, long mobileNumber, string message)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"Dear Hari,");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append($"App Development referrence");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append($"Name : {Name}{Environment.NewLine}Mobile No : {mobileNumber}");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append($"Message : {message}");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Thank You,");
+            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Nature Box");
+
+            mySMS.Message = stringBuilder.ToString();
+            mySMS.MobileNumber = 8089947074;
+
+            return Send();
+        }
+
         private string Send()
         {
             string result;

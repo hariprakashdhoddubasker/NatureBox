@@ -18,22 +18,5 @@
         <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <ContentControl Content="{Binding MenuItem}"/>
         </ScrollViewer>
-        <Grid Margin="5,5,0,5" Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Margin="10,0,0,0" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="0">Software By</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1">:</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="2">HARI PRAKASH</TextBlock>
-            <TextBlock Margin="10,0,0,0" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="0">Contact</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="1">:</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="2">8089947074</TextBlock>
-        </Grid>
     </Grid>
 </UserControl>
