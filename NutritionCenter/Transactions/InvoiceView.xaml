@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:controls="clr-namespace:NatureBox.Service" 
-             xmlns:converter="clr-namespace:NatureBox.Converter"
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
@@ -14,9 +13,6 @@
             <b:CallMethodAction TargetObject="{Binding}" MethodName="Load"/>
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <UserControl.Resources>
-        <converter:NumberIncrementConverter x:Key="NumberIncrementConverter" />
-    </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
             <Grid  Margin="15,0,15,0" >
