@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Background="White">
-            <Border Margin="0 20 0 0" Width="130" Height="150" CornerRadius="80" BorderThickness="1" BorderBrush="Gray">
+            <Border Margin="0 20 0 0" Width="130" Height="150" CornerRadius="0" BorderThickness="1" BorderBrush="Gray">
                 <Border.Background>
                     <ImageBrush ImageSource="/Assets/Hari.JPG"/>
                 </Border.Background>
@@ -75,12 +75,12 @@
                     <TextBlock Text="Mobile App" Margin="10 0" FontSize="14" Foreground="Gray"/>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </StackPanel>       
         
         <Grid Grid.Column="1" Background="{StaticResource PrimaryHueLightBrush}">
             <StackPanel Orientation="Horizontal" Height="100" VerticalAlignment="Top"  Background="{StaticResource PrimaryHueLightBrush}">
                 <Border Width="10" Height="10" HorizontalAlignment="Right" Margin="15" Background="Green" CornerRadius="15" VerticalAlignment="Center"/>
-                <TextBlock Text="HARI PRAKASH DHODDU BASKER" FontSize="28" VerticalAlignment="Center"/>
+                <TextBlock Text="HARI PRAKASH" FontSize="28" VerticalAlignment="Center"/>
             </StackPanel>
             <Border Margin="0 100" VerticalAlignment="TOP">
                 <Grid>
@@ -112,7 +112,7 @@
                 <RowDefinition Height="80*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Background="White">
-                <Image Width="260" VerticalAlignment="Center" HorizontalAlignment="Center" Height="110" Source="/Assets/herbalife_leaf_logo.png"/>
+                <Image Width="260" VerticalAlignment="Center" HorizontalAlignment="Center" Height="110" Source="/Assets/TechKey_Logo.jpg"/>
             </StackPanel>
 
             <Grid Margin="20,0,0,0" Grid.Row="1" >
