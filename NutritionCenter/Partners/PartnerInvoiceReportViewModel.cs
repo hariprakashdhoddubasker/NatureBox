@@ -166,6 +166,11 @@ namespace NatureBox.Partners
             var employeeReferedCustomers = myAllCustomers.Where(customer => customer.EmployeeId == Employee.EmployeeId);
             var filteredInvoice = new List<Invoice>();
 
+            if (this.ToDate.Hour == 0)
+            {
+                this.ToDate += new TimeSpan(23, 59, 0);
+            }
+
             if (IsAllFilter)
             {
                 filteredInvoice = myAllInvoice.Where(invoice => invoice.DateOfPurchase > this.FromDate && invoice.DateOfPurchase < this.ToDate).ToList();

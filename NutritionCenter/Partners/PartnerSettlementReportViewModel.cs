@@ -122,6 +122,11 @@ namespace NatureBox.Partners
         {
             var filteredPartnerPayment = new List<PartnerPayment>();
 
+            if (this.ToDate.Hour == 0)
+            {
+                this.ToDate += new TimeSpan(23, 59, 0);
+            }
+
             if (IsAllFilter)
             {
                 filteredPartnerPayment = myAllPartnerPayments.Where(partnerPayment => partnerPayment.DateOfPayment > this.FromDate && partnerPayment.DateOfPayment < this.ToDate).ToList();

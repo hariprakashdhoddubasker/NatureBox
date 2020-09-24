@@ -93,8 +93,8 @@
                         <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"  Width="*"/>
                         <DataGridTextColumn Header="MRP" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=MRP}"  Width="*"/>
                         <DataGridTextColumn Header="Volume Point" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=VolumePoint, StringFormat=N2}"  Width="*"/>
-                        <DataGridTextColumn Header="Expense" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=Expense}"  Width="*"/>
-                        <DataGridTextColumn Header="Cost" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=Cost}" Width="*"/>
+                        <DataGridTextColumn Header="Expense" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=Expense, StringFormat=N2}"  Width="*"/>
+                        <DataGridTextColumn Header="Cost" Binding="{Binding Converter={StaticResource QuantityMultiplierConverter}, ConverterParameter=Cost, StringFormat=N2}" Width="*"/>
                         <DataGridTextColumn Header="Referred By" Binding="{Binding Customer.Employee.UserName}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
