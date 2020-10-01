@@ -80,7 +80,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBox Margin="5,10" Grid.Column="0"  materialDesign:HintAssist.Hint="NO OF PRODUCTS" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding PartnerPayment.TotalNoOfProducts,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
 
-                <TextBox Margin="5,10" Grid.Column="1"  materialDesign:HintAssist.Hint="TOTAL CUSTOMER AMOUNT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding TotalCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                <TextBox Margin="5,10" Grid.Column="1"  materialDesign:HintAssist.Hint="TOTAL CUSTOMER AMOUNT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding TotalCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" IsReadOnly="True"/>
 
                 <TextBox Margin="5,10" Grid.Column="2"  materialDesign:HintAssist.Hint="TOTAL VOLUMN POINT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding PartnerPayment.TotalVolumnPoint, Mode=TwoWay, StringFormat=N2, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
 

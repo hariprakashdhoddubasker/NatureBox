@@ -50,7 +50,7 @@ namespace NatureBox.Service
             stringBuilder.Append(Environment.NewLine);
             stringBuilder.Append("Nature Box Nutrition Club");
             stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append("Eat good Feel good");                     
+            stringBuilder.Append("Eat good Feel good");
 
             var results = string.Empty;
 
@@ -95,7 +95,8 @@ namespace NatureBox.Service
         {
             string result;
 
-            string url = $"http://sms.pinger.co.in/http-api.php?username={mySMS.UserName}&password={mySMS.Password}&senderid={mySMS.SenderId}&route=1&number={mySMS.MobileNumber}&message={mySMS.Message}";
+
+            var url = $"http://text.pinger.co.in/index.php/smsapi/httpapi/?uname={mySMS.UserName}&password={mySMS.Password}&sender={mySMS.SenderId}&receiver={mySMS.MobileNumber}&route=TA&msgtype=1&sms={mySMS.Message}";
 
             StreamWriter myWriter = null;
             HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(url);
