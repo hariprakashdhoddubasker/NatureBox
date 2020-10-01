@@ -5,9 +5,9 @@
 
     public class SMSData
     {
-        public string UserName { get; } = "natureboxnutrition";
-        public string Password { get; } = "naturebox@123";
-        public string SenderId { get; set; } = "NATBOX";
+        public string UserName { get; } = "absolute";
+        public string Password { get; } = "hari@123";
+        public string SenderId { get; set; } = "PINGER";
         public long MobileNumber { get; set; }
         public string Message { get; set; }
     }
