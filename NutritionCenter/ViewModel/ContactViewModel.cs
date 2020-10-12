@@ -59,6 +59,9 @@ namespace NatureBox.ViewModel
         {
             var smsStatus = new SmsService().SendReferralMessage(Name, MobileNumber, Message);
 
+            this.Name = string.Empty;
+            this.MobileNumber = 0;
+            this.Message = string.Empty;
             UIService.ShowMessage(smsStatus);
         }
     }
