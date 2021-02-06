@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NatureBox.Views"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        ResizeMode="CanMinimize" 
+        ResizeMode="CanResizeWithGrip" 
         WindowState="Maximized"
         Title="Nature Box" Height="450" Width="800">
     <b:Interaction.Triggers>

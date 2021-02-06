@@ -91,15 +91,23 @@ namespace NatureBox.Service
             return Send();
         }
 
+        public string SendReferralMessage(long mobileNumber, string message)
+        {
+            mySMS.Message = message;
+            mySMS.MobileNumber = mobileNumber;
+
+            return Send();
+        }
+
         private string Send()
         {
             string result;
 
             //New API Link
-            //var url = $"http://text.pinger.co.in/index.php/smsapi/httpapi/?uname={mySMS.UserName}&password={mySMS.Password}&sender={mySMS.SenderId}&receiver={mySMS.MobileNumber}&route=TA&msgtype=1&sms={mySMS.Message}";
+            var url = $"http://text.pinger.co.in/index.php/smsapi/httpapi/?uname={mySMS.UserName}&password={mySMS.Password}&sender={mySMS.SenderId}&receiver={mySMS.MobileNumber}&route=TA&msgtype=1&sms={mySMS.Message}";
 
             //Old API link
-            string url = $"http://sms.pinger.co.in/http-api.php?username={mySMS.UserName}&password={mySMS.Password}&senderid={mySMS.SenderId}&route=1&number={mySMS.MobileNumber}&message={mySMS.Message}";
+            //string url = $"http://sms.pinger.co.in/http-api.php?username={mySMS.UserName}&password={mySMS.Password}&senderid={mySMS.SenderId}&route=1&number={mySMS.MobileNumber}&message={mySMS.Message}";
 
             StreamWriter myWriter = null;
             HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(url);

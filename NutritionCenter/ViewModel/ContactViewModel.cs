@@ -15,15 +15,15 @@ namespace NatureBox.ViewModel
             this.BtnSendMessageCommand = new Command(this.OnSendMessageClick, this.CanExecuteSendMessage);
         }
 
-        public string Name
-        {
-            get => this.myName;
-            set
-            {
-                SetProperty(ref myName, value);
-                ((Command)this.BtnSendMessageCommand).RaiseCanExecuteChanged();
-            }
-        }
+        //public string Name
+        //{
+        //    get => this.myName;
+        //    set
+        //    {
+        //        SetProperty(ref myName, value);
+        //        ((Command)this.BtnSendMessageCommand).RaiseCanExecuteChanged();
+        //    }
+        //}
 
         public long MobileNumber
         {
@@ -49,17 +49,16 @@ namespace NatureBox.ViewModel
 
         private bool CanExecuteSendMessage(object arg)
         {
-            return !string.IsNullOrEmpty(Name) &&
-                    long.TryParse(MobileNumber.ToString(), out _) &&
+            return long.TryParse(MobileNumber.ToString(), out _) &&
                     MobileNumber.ToString().Length == 10 &&
                     !string.IsNullOrEmpty(Message);
         }
 
         private void OnSendMessageClick(object obj)
         {
-            var smsStatus = new SmsService().SendReferralMessage(Name, MobileNumber, Message);
+            var smsStatus = new SmsService().SendReferralMessage(MobileNumber, Message);
 
-            this.Name = string.Empty;
+            //this.Name = string.Empty;
             this.MobileNumber = 0;
             this.Message = string.Empty;
             UIService.ShowMessage(smsStatus);

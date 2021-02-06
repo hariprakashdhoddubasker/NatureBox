@@ -19,5 +19,10 @@
             var ctrl = (PasswordBox)sender;
             ((LoginWindowViewModel)this.DataContext).Employee.Password = ctrl.Password;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((LoginWindowViewModel)this.DataContext).Employee.Password = txtPassword.Password;
+        }
     }
 }

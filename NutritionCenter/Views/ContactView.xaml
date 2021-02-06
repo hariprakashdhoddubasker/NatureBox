@@ -7,9 +7,6 @@
              xmlns:validation="clr-namespace:NatureBox.Validation"
              mc:Ignorable="d" 
              d:DesignHeight="560" d:DesignWidth="970">
-    <UserControl.InputBindings>
-        <KeyBinding Command="{Binding Path=BtnSendMessageCommand}" Key="Enter" />
-    </UserControl.InputBindings>
     <Grid  Margin="0 -40 0 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -88,8 +85,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Vertical" Margin="10">
-                        <TextBlock Text="GET IN TOUCH" Margin="10 0" FontSize="18" HorizontalAlignment="Center" Foreground="Gray" FontWeight="SemiBold"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBlock Text="GET IN TOUCH" Margin="10 0" FontSize="18" HorizontalAlignment="Center" Foreground="Gray" FontWeight="SemiBold"/>   
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="MOBILE NO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="0" Grid.Column="0">
                             <TextBox.Text>
                                 <Binding Path="MobileNumber" UpdateSourceTrigger="PropertyChanged">
@@ -99,7 +95,11 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="MESSAGE" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0"/>
+                        <materialDesign:Badged />
+                        <Label Content="" FontSize="18" FontFamily="Champagne &amp; Limousines"  Foreground="Gray"/>
+                        <Label Content="MESSAGE" FontSize="18" FontFamily="Champagne &amp; Limousines"  Foreground="Gray"/>
+                        <TextBox Margin="0,10" Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Height="180" TextWrapping="Wrap" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" SpellCheck.IsEnabled="True" AcceptsReturn="True"
+                          VerticalScrollBarVisibility="Auto"/>
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="150" Content="SEND MESSAGE" Margin="0,50" Command="{Binding BtnSendMessageCommand}"/>
                     </StackPanel>
                 </Grid>
@@ -108,14 +108,10 @@
 
         <Grid  Grid.Column="2" Background="{StaticResource PrimaryHueDarkBrush}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="80*"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Background="White">
-                <Image Width="260" VerticalAlignment="Center" HorizontalAlignment="Center" Height="110" Source="/Assets/TechKey_Logo.jpg"/>
-            </StackPanel>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>   
 
-            <Grid Margin="20,0,0,0" Grid.Row="1" >
+            <Grid Margin="20,0,0,0" Grid.Row="0" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="20*"/>
@@ -124,7 +120,6 @@
                     <RowDefinition Height="20*"/>
                 </Grid.RowDefinitions>
                 <StackPanel  Grid.Row="0" >
-                    <TextBlock Text="Build Your Dreams" FontSize="15" Margin="10" Foreground="White" FontWeight="Medium" HorizontalAlignment="Right" Grid.Row="1"/>
                     <TextBlock Margin="0 10" Text="Why Choose Us?" FontSize="18" Foreground="White"  FontWeight="Medium"/>
                 </StackPanel>
                 <Grid Grid.Row="1">
