@@ -11,6 +11,10 @@ using Unity;
 using System.Windows.Input;
 using NatureBox.Commands;
 using System;
+using System.Collections.Generic;
+using NatureBox.Model;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace NatureBox.ViewModel
 {
@@ -32,30 +36,37 @@ namespace NatureBox.ViewModel
         private CustomerPaymentReportViewModel myCustomerPaymentReportViewModel;
         private IEventAggregator myEventAggregator;
         private string myCurrentUserName;
+        private ObservableCollection<Customer> myBirthdayAlerts;
 
         public MainViewModel(IEventAggregator eventAggregator)
         {
-            Task.Run(() =>
-            {
-                myEventAggregator = eventAggregator;
-                myEventAggregator.GetEvent<NavigateViewsEvent>().Subscribe(UpdateViewModel);
-                myContactViewModel = ContainerHelper.Container.Resolve<ContactViewModel>();
-                myEmployeeRegistrationViewModel = ContainerHelper.Container.Resolve<PartnerRegistrationViewModel>();
-                myCustomerRegistrationViewModel = ContainerHelper.Container.Resolve<CustomerRegistrationViewModel>();
-                myProductRegistrationViewModel = ContainerHelper.Container.Resolve<ProductRegistrationViewModel>();
-                myCustomerPaymentViewModel = ContainerHelper.Container.Resolve<CustomerPaymentViewModel>();
-                myPartnerPaymentViewModel = ContainerHelper.Container.Resolve<PartnerSettlementViewModel>();
-                myInvoiceViewModel = ContainerHelper.Container.Resolve<InvoiceViewModel>();
-                myCustomerAttendanceViewModel = ContainerHelper.Container.Resolve<CustomerInvoiceReportViewModel>();
-                myEmployeeReportViewModel = ContainerHelper.Container.Resolve<PartnerInvoiceReportViewModel>();
-                myPartnerPaymentReportViewModel = ContainerHelper.Container.Resolve<PartnerSettlementReportViewModel>();
-                myCustomerPaymentReportViewModel = ContainerHelper.Container.Resolve<CustomerPaymentReportViewModel>();
-                myHealthRecordViewModel = ContainerHelper.Container.Resolve<HealthRecordViewModel>();
-                myBackUpRestoreViewModel = ContainerHelper.Container.Resolve<BackUpRestoreViewModel>();
+            var task = Task.Run(() =>
+             {
+                 myEventAggregator = eventAggregator;
+                 myEventAggregator.GetEvent<NavigateViewsEvent>().Subscribe(UpdateViewModel);
+                 myEventAggregator.GetEvent<NotifyBirthDayAlerts>().Subscribe(NotifyBirthDayAlert);
+                 myContactViewModel = ContainerHelper.Container.Resolve<ContactViewModel>();
+                 myEmployeeRegistrationViewModel = ContainerHelper.Container.Resolve<PartnerRegistrationViewModel>();
+                 myProductRegistrationViewModel = ContainerHelper.Container.Resolve<ProductRegistrationViewModel>();
+                 myCustomerPaymentViewModel = ContainerHelper.Container.Resolve<CustomerPaymentViewModel>();
+                 myPartnerPaymentViewModel = ContainerHelper.Container.Resolve<PartnerSettlementViewModel>();
+                 myInvoiceViewModel = ContainerHelper.Container.Resolve<InvoiceViewModel>();
+                 myCustomerAttendanceViewModel = ContainerHelper.Container.Resolve<CustomerInvoiceReportViewModel>();
+                 myEmployeeReportViewModel = ContainerHelper.Container.Resolve<PartnerInvoiceReportViewModel>();
+                 myPartnerPaymentReportViewModel = ContainerHelper.Container.Resolve<PartnerSettlementReportViewModel>();
+                 myCustomerPaymentReportViewModel = ContainerHelper.Container.Resolve<CustomerPaymentReportViewModel>();
+                 myHealthRecordViewModel = ContainerHelper.Container.Resolve<HealthRecordViewModel>();
+                 myBackUpRestoreViewModel = ContainerHelper.Container.Resolve<BackUpRestoreViewModel>();
+                 myCustomerRegistrationViewModel = ContainerHelper.Container.Resolve<CustomerRegistrationViewModel>();
+                 BirthdayAlerts = new ObservableCollection<Customer>(myCustomerRegistrationViewModel.GetCustomerBirthdayAlerts());
+                 this.SelectedViewModel = myInvoiceViewModel;
+                 this.BtnContactCommand = new Command(this.OnContactClick, o => true);
+             });
+        }
 
-                this.SelectedViewModel = myInvoiceViewModel;
-                this.BtnContactCommand = new Command(this.OnContactClick, o => true);
-            });
+        private void NotifyBirthDayAlert(List<Customer> customers)
+        {
+            BirthdayAlerts = new ObservableCollection<Customer>(customers);
         }
 
         public ICommand BtnContactCommand { get; private set; }
@@ -73,6 +84,14 @@ namespace NatureBox.ViewModel
             get { return myCurrentUserName; }
             set => SetProperty(ref myCurrentUserName, value);
         }
+
+
+        public ObservableCollection<Customer> BirthdayAlerts
+        {
+            get { return myBirthdayAlerts; }
+            set => SetProperty(ref myBirthdayAlerts, value);
+        }
+
 
         private void UpdateViewModel(NatureBoxForms natureBoxForms)
         {

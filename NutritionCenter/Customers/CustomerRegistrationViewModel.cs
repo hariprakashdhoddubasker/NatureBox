@@ -10,6 +10,10 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Input;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using NatureBox.Event;
+    using Prism.Events;
 
     public class CustomerRegistrationViewModel : BaseViewModel
     {
@@ -18,19 +22,20 @@
         public ICommand BtnSaveUpdateCommand { get; }
         public ICommand BtnDeleteCommand { get; }
         public ICommand GridUpdateCommand { get; }
-
+        private readonly IEventAggregator myEventAggregator;
         private ObservableCollection<Customer> myGridCustomers;
         private string myButtonState;
         private Customer myCustomer;
         private ObservableCollection<Partner> myReferrableEmployees;
 
-        public CustomerRegistrationViewModel(ICustomerRepository customerRepo, IPartnerRepository employeeRepo)
+        public CustomerRegistrationViewModel(ICustomerRepository customerRepo, IPartnerRepository employeeRepo, IEventAggregator eventAggregator)
         {
+            myEventAggregator = eventAggregator;
             myCustomerRepo = customerRepo;
             myEmployeeRepo = employeeRepo;
             this.Customer = new Customer();
             this.BtnSaveUpdateCommand = new Command(this.BtnSaveUpdateClick, this.IsValidCustomer);
-            SelectedReferredEmployee = new Partner();          
+            SelectedReferredEmployee = new Partner();
             this.BtnDeleteCommand = new Command(this.BtnDeleteClick, this.IsValidCustomer);
             this.GridUpdateCommand = new Command(this.GridUpdate, o => true);
             GridCustomers = new ObservableCollection<Customer>();
@@ -89,12 +94,22 @@
         {
             Clear();
             ReferrableEmployees = new ObservableCollection<Partner>(await myEmployeeRepo.GetAllAsync());
-            GridCustomers = new ObservableCollection<Customer>(await myCustomerRepo.GetAllAsync());
+            GridCustomers = await GetAllCustomers();
 
             foreach (var customer in GridCustomers)
             {
                 customer.Employee = ReferrableEmployees.FirstOrDefault(employee => employee.EmployeeId == customer.EmployeeId);
             }
+        }
+
+        private async Task<ObservableCollection<Customer>> GetAllCustomers()
+        {
+            return new ObservableCollection<Customer>(await myCustomerRepo.GetAllAsync());
+        }
+        public IEnumerable<Customer> GetCustomerBirthdayAlerts()
+        {
+            var allCustomers = GetAllCustomers().Result;
+            return allCustomers.Where(customer => customer.DOB.Date == DateTime.Now.Date || customer.DOB.Date == DateTime.Now.Date.AddDays(1));
         }
 
         private void Customer_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -131,9 +146,9 @@
             else
             {
                 myCustomerRepo.UpdateAsync(Customer);
-            }
-
+            }            
             Load();
+            myEventAggregator.GetEvent<NotifyBirthDayAlerts>().Publish(GetCustomerBirthdayAlerts().ToList());
         }
 
         private void BtnDeleteClick(object obj)

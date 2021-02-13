@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NatureBox.Views"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:model="clr-namespace:NatureBox.Model;assembly=NatureBox.Model"
         mc:Ignorable="d"
         ResizeMode="CanResizeWithGrip" 
         WindowState="Maximized"
@@ -25,21 +27,61 @@
         </Grid.ColumnDefinitions>
         <local:HeaderView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
         <local:NavigationView  Grid.Row="1" DataContext="{Binding NavigationViewModel}" Grid.RowSpan="2" />
-        <TextBlock Margin="0,5,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Grid.Row="1" Grid.Column="1" Foreground="Gray" Text="SUPPORT">
-            <TextBlock.Style>
-                <Style TargetType="TextBlock">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Cursor" Value="Hand"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-            <TextBlock.InputBindings>
-                <MouseBinding Command="{Binding BtnContactCommand}" MouseAction="LeftClick" />
-            </TextBlock.InputBindings>
-        </TextBlock>
-        <Grid  Margin="0 40 0 0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" > 
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" >
+            
+            <materialDesign:PopupBox StaysOpen="True">
+                <materialDesign:PopupBox.ToggleCheckedContent>
+                    <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}" IsChecked="False"
+                                    ToolTip="Birthday Alerts" Margin="0,5,0,0" >
+                        <materialDesign:PackIcon Kind="BellRing" Width="24" Height="24" />
+                    </ToggleButton>
+                </materialDesign:PopupBox.ToggleCheckedContent>
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="BellRing" Width="35" Height="35"  Foreground="#689F38"/>                
+                </materialDesign:PopupBox.ToggleContent>
+                <StackPanel Margin="5 0 5 0">
+                    <ListBox ItemsSource="{Binding BirthdayAlerts}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type model:Customer}">
+                                <Border x:Name="Border" Padding="8" BorderThickness="0 0 0 1" BorderBrush="{DynamicResource MaterialDesignDivider}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition SharedSizeGroup="Checkerz" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <ToggleButton VerticalAlignment="Center" Style="{StaticResource MaterialDesignActionLightToggleButton}">
+                                            <materialDesign:PackIcon Kind="CakeVariant" Width="24" Height="24" />
+                                        </ToggleButton>
+                                        <StackPanel Margin="8 0 0 0" Grid.Column="1">
+                                            <TextBlock FontWeight="Bold" Text="{Binding Name, StringFormat='{} Name : {0}'}" />
+                                            <TextBlock Text="{Binding DOB, StringFormat='{} BirthDay : {0:dd MMM yyyy}'}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </materialDesign:PopupBox>
+            
+            <TextBlock Margin="20,5,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Foreground="Gray" Text="SUPPORT">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding BtnContactCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+            </TextBlock>
+          
+        </StackPanel>
+  
+        <Grid  Margin="0 40 0 0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" >
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/NatureBox_Logo.png" Stretch="UniformToFill" Opacity="0.2"/>
             </Grid.Background>
