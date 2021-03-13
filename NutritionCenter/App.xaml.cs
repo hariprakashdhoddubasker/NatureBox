@@ -19,7 +19,12 @@
     /// </summary
     public partial class App : Application
     {
-        private readonly List<string> macIdList = new List<string>() { "C8D9D2EE9E6E", "A85E45306811", "B888E3CBC29D" };
+        private readonly List<string> macIdList = new List<string>() { 
+            "C8D9D2EE9E6E", // My PC
+            "A85E45306811", // Nature Box Main Branch
+            "B888E3CBC29D", // Praveen PC
+            "74D435971F48"  //Gugai Branch
+        };
 
         protected override void OnStartup(StartupEventArgs e)
         {

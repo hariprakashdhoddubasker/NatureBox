@@ -37,6 +37,8 @@ namespace NatureBox.ViewModel
         private IEventAggregator myEventAggregator;
         private string myCurrentUserName;
         private ObservableCollection<Customer> myBirthdayAlerts;
+        private string myIconSymbol;
+        private bool myBirthDayAlertEnable;
 
         public MainViewModel(IEventAggregator eventAggregator)
         {
@@ -58,7 +60,7 @@ namespace NatureBox.ViewModel
                  myHealthRecordViewModel = ContainerHelper.Container.Resolve<HealthRecordViewModel>();
                  myBackUpRestoreViewModel = ContainerHelper.Container.Resolve<BackUpRestoreViewModel>();
                  myCustomerRegistrationViewModel = ContainerHelper.Container.Resolve<CustomerRegistrationViewModel>();
-                 BirthdayAlerts = new ObservableCollection<Customer>(myCustomerRegistrationViewModel.GetCustomerBirthdayAlerts());
+                 NotifyBirthDayAlert(myCustomerRegistrationViewModel.GetCustomerBirthdayAlerts().ToList());
                  this.SelectedViewModel = myInvoiceViewModel;
                  this.BtnContactCommand = new Command(this.OnContactClick, o => true);
              });
@@ -67,6 +69,15 @@ namespace NatureBox.ViewModel
         private void NotifyBirthDayAlert(List<Customer> customers)
         {
             BirthdayAlerts = new ObservableCollection<Customer>(customers);
+
+            IconSymbol = "Bell";
+            BirthDayAlertEnable = false;
+
+            if (BirthdayAlerts.Count > 0)
+            {
+                IconSymbol = "BellRing";
+                BirthDayAlertEnable = true;
+            }
         }
 
         public ICommand BtnContactCommand { get; private set; }
@@ -85,13 +96,23 @@ namespace NatureBox.ViewModel
             set => SetProperty(ref myCurrentUserName, value);
         }
 
+        public string IconSymbol
+        {
+            get { return myIconSymbol; }
+            set => SetProperty(ref myIconSymbol, value);
+        }
+
+        public bool BirthDayAlertEnable
+        {
+            get { return myBirthDayAlertEnable; }
+            set => SetProperty(ref myBirthDayAlertEnable, value);
+        }
 
         public ObservableCollection<Customer> BirthdayAlerts
         {
             get { return myBirthdayAlerts; }
             set => SetProperty(ref myBirthdayAlerts, value);
         }
-
 
         private void UpdateViewModel(NatureBoxForms natureBoxForms)
         {

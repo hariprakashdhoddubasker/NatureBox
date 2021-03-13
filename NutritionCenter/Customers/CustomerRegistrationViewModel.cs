@@ -109,7 +109,12 @@
         public IEnumerable<Customer> GetCustomerBirthdayAlerts()
         {
             var allCustomers = GetAllCustomers().Result;
-            return allCustomers.Where(customer => customer.DOB.Date == DateTime.Now.Date || customer.DOB.Date == DateTime.Now.Date.AddDays(1));
+       
+            return allCustomers.Where(
+                                        customer => 
+                                            (customer.DOB.Date.Day == DateTime.Now.Date.Day && customer.DOB.Date.Month == DateTime.Now.Date.Month) || 
+                                            (customer.DOB.Date.Day == DateTime.Now.Date.AddDays(1).Day && customer.DOB.Date.Month == DateTime.Now.Date.AddDays(1).Month)
+                                        );
         }
 
         private void Customer_PropertyChanged(object sender, PropertyChangedEventArgs e)

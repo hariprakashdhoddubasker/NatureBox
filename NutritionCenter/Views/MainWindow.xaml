@@ -29,7 +29,7 @@
         <local:NavigationView  Grid.Row="1" DataContext="{Binding NavigationViewModel}" Grid.RowSpan="2" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" >
             
-            <materialDesign:PopupBox StaysOpen="True">
+            <materialDesign:PopupBox StaysOpen="True" IsEnabled="{Binding BirthDayAlertEnable}">
                 <materialDesign:PopupBox.ToggleCheckedContent>
                     <ToggleButton Style="{StaticResource MaterialDesignActionToggleButton}" IsChecked="False"
                                     ToolTip="Birthday Alerts" Margin="0,5,0,0" >
@@ -37,7 +37,7 @@
                     </ToggleButton>
                 </materialDesign:PopupBox.ToggleCheckedContent>
                 <materialDesign:PopupBox.ToggleContent>
-                    <materialDesign:PackIcon Kind="BellRing" Width="35" Height="35"  Foreground="#689F38"/>                
+                    <materialDesign:PackIcon Kind="{Binding IconSymbol}" Width="35" Height="35"  Foreground="#689F38"/>                
                 </materialDesign:PopupBox.ToggleContent>
                 <StackPanel Margin="5 0 5 0">
                     <ListBox ItemsSource="{Binding BirthdayAlerts}">
