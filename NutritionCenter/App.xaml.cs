@@ -23,7 +23,7 @@
             "C8D9D2EE9E6E", // My PC
             "A85E45306811", // Nature Box Main Branch
             "B888E3CBC29D", // Praveen PC
-            "74D435971F48"  //Gugai Branch
+            "74D435971F48"  // Nature Box Gugai Branch
         };
 
         protected override void OnStartup(StartupEventArgs e)
