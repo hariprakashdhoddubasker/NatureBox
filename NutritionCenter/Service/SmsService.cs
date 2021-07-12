@@ -102,10 +102,12 @@ namespace NatureBox.Service
             //New API Link
             //var url = $"http://text.pinger.co.in/index.php/smsapi/httpapi/?uname={mySMS.UserName}&password={mySMS.Password}&sender={mySMS.SenderId}&receiver={mySMS.MobileNumber}&route=TA&msgtype=1&sms={mySMS.Message}";
 
-            //New template registered API link
-            var url = $"http://txt.pinger.co.in/vendorsms/pushsms.aspx?user={mySMS.UserName}&password={mySMS.Token}&msisdn={mySMS.MobileNumber}&sid={mySMS.SenderId}&msg={mySMS.Message}&fl=0&gwid=2";
+            //New template registered API link 1
+            //var url = $"http://txt.pinger.co.in/vendorsms/pushsms.aspx?user={mySMS.UserName}&password={mySMS.Token}&msisdn={mySMS.MobileNumber}&sid={mySMS.SenderId}&msg={mySMS.Message}&fl=0&gwid=2";
 
-
+            //"http://txt.pinger.co.in/index.php/smsapi/httpapi/?secret=NK8qAnbJVit1zRuYtxgO&sender=NATBOX&tempid=1207162079173770810&receiver=8089947074&route=TA&msgtype=1&sms=DEAR%20sir,%20Nature%20Box%20debited%20for%20INR%20300%20Bal%20INR%203900%20as%20of%2024%20Thank%20You,%20Nature%20Box%20Nutrition%20Club%20Eat%20Good%20Feel%20Good.
+            //New template registered API link 2
+            var url = $"http://txt.pinger.co.in/index.php/smsapi/httpapi/?secret={mySMS.SecretCode}&sender={mySMS.SenderId}&receiver={mySMS.MobileNumber}&route=TA&tempid=1207162079173770810&msgtype=1&sms={mySMS.Message}";
             StreamWriter myWriter = null;
             HttpWebRequest objRequest = (HttpWebRequest)WebRequest.Create(url);
 
