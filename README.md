@@ -1,7 +1,7 @@
-# NatureBox – Nutrition Club Management System
+# NutriClubManager – Nutrition Club Management System
 
 ## Overview
-NatureBox is a desktop application designed for Nutrition Clubs to streamline their daily operations and member management. Built with WPF in C# .NET, it provides an intuitive interface for club administrators to manage member profiles, track attendance, monitor nutritional plans, and handle product sales. The application centralizes the data and processes of a nutrition/fitness club, improving efficiency and record-keeping.
+NutriClubManager is a desktop application designed for Nutrition Clubs to streamline their daily operations and member management. Built with WPF in C# .NET, it provides an intuitive interface for club administrators to manage member profiles, track attendance, monitor nutritional plans, and handle product sales. The application centralizes the data and processes of a nutrition/fitness club, improving efficiency and record-keeping.
 
 ## Features
 
@@ -26,8 +26,8 @@ NatureBox is a desktop application designed for Nutrition Clubs to streamline th
 - A local database system (SQL Server Express or SQLite) may be needed if the app stores data locally.
 
 ### 2. Source Code
-- Clone or download the [NatureBox](https://github.com/hariprakashdhoddubasker/NatureBox) repository from GitHub.
-- Locate the `NatureBox` folder which contains the Visual Studio solution (`.sln`) and related project files.
+- Clone or download the [NutriClubManager](https://github.com/hariprakashdhoddubasker/NutriClubManager) repository from GitHub.
+- Locate the `NutriClubManager` folder which contains the Visual Studio solution (`.sln`) and related project files.
 
 ### 3. Database Configuration
 - Update the connection string in the configuration file (e.g., `app.config`) to point to your SQL instance.
